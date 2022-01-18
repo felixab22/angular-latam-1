@@ -1,0 +1,15 @@
+{
+  "/api/profile/*": {
+    "target": "http://negos.dev.appslatam.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/api/create/*": {
+    "target": "http://negos.dev.appslatam.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+

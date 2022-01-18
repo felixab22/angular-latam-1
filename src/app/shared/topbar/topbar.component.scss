@@ -1,0 +1,27 @@
+.topbar-spacer {
+  flex: 1 1 auto;
+}
+.topbar-logo {
+  vertical-align: middle;
+  border-radius: 25px;
+  margin-right: 10px;
+  height: 35px;
+}
+.topbar-link {
+  color: #d8d8d8;
+  // position: absolute;
+  margin-right: 10px;
+  top: 0;
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  // padding: 0 16px;
+  text-decoration: none;
+  i.admin {
+    font-size: 9px;
+    padding: 0;
+    margin: 0;
+    color: #eee;
+  }
+}

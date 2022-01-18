@@ -1,0 +1,63 @@
+#estadosolicitud {
+  p{
+    margin-top: 10px;
+    font-weight: 700;
+  }
+  .head {
+    .col {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .col2 {
+      display: grid;
+      grid-template-columns: 25% 25% 20% 30%;
+    }
+    .col2,
+    .col {
+      mat-form-field {
+        margin: 0 5px;
+        mat-label {
+          font-weight: 700;
+        }
+      }
+      .example-button-row {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        button {
+          margin: 5px;
+        }
+      }
+    }
+  }
+  .table-content {
+    margin-top: 5px;
+    table {
+      width: 100%;
+      ng-container th {
+        font-weight: 700;
+        color: blue;
+        text-align: center;
+      }
+    }
+
+    .mat-form-field {
+      font-size: 14px;
+      width: 90%;
+      // margin: 0!important;
+    }
+
+    // td,
+    // th {
+    //   width: 25%;
+    // }
+  }
+  .mat-sort-header-container {
+    font-weight: 700 !important;
+    color: red !important;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
+}

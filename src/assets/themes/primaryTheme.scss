@@ -1,0 +1,99 @@
+@import '~@angular/material';
+@import '~@angular/material/theming';
+
+$primary-color: #1b0088;
+
+//@include mat.core();
+//900
+$mat-latam-indigo: (
+  50: #ebe4f4,
+  100: #cdbde5,
+  200: #ab92d3,
+  300: #8b66c3,
+  400: #7245b6,
+  500: #5823aa,
+  600: #501ea4,
+  700: #42169c,
+  800: #350f95,
+  900: $primary-color,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: dark-primary-text,
+    100: dark-primary-text,
+    200: dark-primary-text,
+    300: dark-primary-text,
+    400: dark-primary-text,
+    500: light-primary-text,
+    600: light-primary-text,
+    700: light-primary-text,
+    800: light-primary-text,
+    900: light-primary-text,
+    A100: dark-primary-text,
+    A200: light-primary-text,
+    A400: light-primary-text,
+    A700: light-primary-text,
+  )
+);
+
+//500
+$mat-latam-red-accent: (
+  50: #fee3e9,
+  100: #fbb9c7,
+  200: #f88ba3,
+  300: #f35c7e,
+  400: #ed3864,
+  500: #e8114a,
+  600: #d80949,
+  700: #c30146,
+  800: #af0044,
+  900: #8d003f,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: dark-primary-text,
+    100: dark-primary-text,
+    200: dark-primary-text,
+    300: dark-primary-text,
+    400: dark-primary-text,
+    500: light-primary-text,
+    600: light-primary-text,
+    700: light-primary-text,
+    800: light-primary-text,
+    900: light-primary-text,
+    A100: dark-primary-text,
+    A200: light-primary-text,
+    A400: light-primary-text,
+    A700: light-primary-text,
+  )
+);
+
+$my-primary: define-palette($mat-latam-indigo, 900);
+$my-accent: define-palette($mat-latam-red-accent, 500, A100, A400);
+
+// The "warn" palette is optional and defaults to red if not specified.
+$my-warn: define-palette($red-palette);
+
+$my-theme: define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
+));
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include core-theme($my-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+@include button-theme($my-theme);
+
+@include toolbar-theme($my-theme);
+@include sidenav-theme($my-theme);
+// Include the theme mixins for other components you use here.

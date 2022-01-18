@@ -1,0 +1,45 @@
+<app-page-header [title]="'Creación de Negos'"></app-page-header>
+<p-blockUI [blocked]="blockedDocument">
+  <em class="pi pi-lock" style="font-size: 3rem"></em>
+</p-blockUI>
+
+<div class="creation-content" >
+  <p-toast position="top-right" [baseZIndex]="60000"></p-toast>
+  <app-create-action-buttons
+    [disableValidation]="disableValidation"
+    (validateEvent)="validar()"
+    (createEvent)="crear()"
+    [disableSend]="disableSend" (cleanEvent)="limpiarData()">
+  </app-create-action-buttons>
+  <div style="margin-top: 60px;" >
+      <hot-table  class="hot" #hot
+          [settings]="hotSettings"
+          [colHeaders]="true"
+          [rowHeaders]="true"
+          [dropdownMenu]="true"
+          [filters]="true"
+          [hiddenColumns]="true"
+          [manualRowMove]="true"
+          [manualColumnResize]="true"
+          [multiColumnSorting]="true"
+          [contextMenu]="true"
+          width="2500"
+          height="auto">
+          <hot-column data="officeID" title="Office ID"></hot-column>
+          <hot-column data="cuenta" title="Cuenta"></hot-column>
+          <hot-column data="tarifa" title="Tarifa" type="numeric"></hot-column>
+          <hot-column data="espacios" title="Espacios"  type="numeric"></hot-column>
+          <hot-column data="fecha" title="Fecha"></hot-column>
+          <hot-column data="primerTL" title="1er TL"  type="numeric"></hot-column>
+          <hot-column data="porcentaje" title="Porcent."  type="numeric"></hot-column>
+          <hot-column data="segundoTL" title="2do TL"  type="numeric"></hot-column>
+          <hot-column data="tref" title="TREF"></hot-column>
+          <hot-column data="farebasis" title="Farebasis"></hot-column>
+          <hot-column data="carrier" title="Carrier"></hot-column>
+          <hot-column data="numeroVuelo" title="NroVuelo"></hot-column>
+          <hot-column data="clase" title="Clase"></hot-column>
+          <hot-column data="parPuntos" title="ParPunto"></hot-column>
+          <hot-column data="mensajeValidacion" title="Validacion"  editor= "false"></hot-column>
+      </hot-table>
+  </div>
+</div>

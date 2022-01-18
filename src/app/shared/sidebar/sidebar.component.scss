@@ -1,0 +1,56 @@
+@import "src/assets/themes/primaryTheme";
+
+
+.sidenav-container{
+  height: 100vh;
+}
+
+.sidenav-menu{
+  background: $primary-color;
+}
+
+.menu-option-selected{
+  background: rgba(0, 0 ,0, 0.5);
+}
+
+a {
+  color: inherit;
+}
+
+mat-icon{
+  color: white;
+  padding-right: 30px;
+}
+
+.sidenav-option{
+  color: white;
+  font-family: Latam Sans Regular, sans-serif;
+}
+
+.sidenav-content{
+  padding: 50px 50px;
+}
+.unlock-btn {
+  position: absolute;
+  left: 0;
+  bottom: 80px;
+  background-color: #ffba01;
+  padding: 10px 18px;
+  width: 90%;
+  color: #333333;
+  font-weight: 700;
+  transition: background-color 0.3s;
+  i {
+    font-size: 16px;
+    margin-right: 6px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ed990b;
+  }
+}
+mat-icon{
+  margin-right: 15px!important;
+  color: #fff;
+}

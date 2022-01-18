@@ -1,0 +1,118 @@
+<app-page-header [title]="'Estado de Solicitud'"></app-page-header>
+<div id="estadosolicitud">
+  <p>Filtrar:</p>
+  <div class="head">
+    <div class="col">
+      <mat-form-field appearance="outline">
+        <mat-label>Rango de Fecha</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate [(ngModel)]="consulta.dateFrom" placeholder="Start date">
+          <input matEndDate [(ngModel)]="consulta.dateTo" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        <!-- <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Fecha de inicio invalida</mat-error>
+            <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha fin invalida</mat-error> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Solicitante</mat-label>
+        <mat-select [(ngModel)]="consulta.user">
+          <mat-option *ngFor="let item of solocitantes" [value]="item.applicantUser">{{item.applicanFullName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de nego</mat-label>
+        <mat-select [(ngModel)]="consulta.requestType">
+          <mat-option *ngFor="let item of tipo" [value]="item.label">{{item.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col2">
+      <mat-form-field appearance="outline">
+        <mat-label>Estado de solicitud</mat-label>
+        <mat-select [(ngModel)]="consulta.status">
+          <mat-option *ngFor="let item of estados" [value]="item.label">{{item.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Número de solicitud</mat-label>
+        <input matInput placeholder="Placeholder" [(ngModel)]="consulta.requestNumber">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>PNR</mat-label>
+        <input matInput placeholder="Placeholder" [(ngModel)]="consulta.pnr">
+      </mat-form-field>
+      <div class="example-button-row">
+        <button mat-flat-button color="accent" (click)="listarTablaresponse()">CONSULTAR</button>
+        <button mat-flat-button style="background: #1b0088;color: #fff;" (click)="exporter.exportTable('xlsx',({fileName:'reporteNegos'}))">
+          <mat-icon>save</mat-icon> DESCARGAR
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="table-content">
+    <div class="header-table">
+      <!-- <mat-form-field appearance="standard">
+          <mat-label>BUSCAR</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="ESCRIBE PARA FILTAR" #input>
+        </mat-form-field> -->
+      <!-- <div class="example-button-row">
+          <button mat-flat-button color="accent" (click)="exporter.exportTable('xlsx',({fileName:'reporteNegos'}))">DESCARGAR</button>
+        </div> -->
+    </div>
+
+    <div class="mat-elevation-z8">
+      <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" matSort>
+        <ng-container matColumnDef="applicantName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID N°</th>
+          <td mat-cell *matCellDef="let row"> {{row.applicantName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="applicantUser">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> OFFICE ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.applicantUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="availableSeat">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CUENTA </th>
+          <td mat-cell *matCellDef="let row"> {{row.availableSeat}} </td>
+        </ng-container>
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ESPACIOS </th>
+          <td mat-cell *matCellDef="let row"> {{row.createdDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="od">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> TARIFA </th>
+          <td mat-cell *matCellDef="let row"> {{row.od}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pnr">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA INICIO </th>
+          <td mat-cell *matCellDef="let row"> {{row.pnr}} </td>
+        </ng-container>
+        <ng-container matColumnDef="updatedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA FIN </th>
+          <td mat-cell *matCellDef="let row"> {{row.updatedDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requestType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 1 TL </th>
+          <td mat-cell *matCellDef="let row"> {{row.requestType}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> PORCENTAJE </th>
+          <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+        </ng-container>
+        <ng-container matColumnDef="requestNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> DATA </th>
+          <td mat-cell *matCellDef="let row"> {{row.requestNumber}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+    </div>
+
+  </div>
+</div>

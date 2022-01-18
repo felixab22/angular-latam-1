@@ -1,0 +1,15 @@
+mat-card{
+  width: 100%;
+  /*padding: 1px 1px;*/
+  font-family: Latam Sans Regular, sans-serif;
+}
+
+mat-card-content{
+  padding-top: 15px;
+}
+
+.content-text{
+  font-size: 36px;
+  font-weight: bolder;
+}
+

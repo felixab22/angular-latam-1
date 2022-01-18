@@ -1,0 +1,9 @@
+{
+  "build_id": "999",
+  "git_commit": "9999999999999999999999999999",
+  "gsuite_client_id": "local",
+  "gsuite_client_email": "local",
+  "environment": "local",
+  "base_href": "localhost:4200",
+  "background_color": "black"
+}

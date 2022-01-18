@@ -1,0 +1,19 @@
+<mat-grid-list [cols]="columns" rowHeight="160px" [gutterSize]="'50px'">
+  <mat-grid-tile
+    *ngFor="let grid of gridCardItems; last as isLastField"
+    [colspan]="grid.cols"
+    [rowspan]="grid.rows">
+
+
+    <mat-card>
+      <mat-card-title>{{grid.title}}</mat-card-title>
+      <mat-card-content>
+        <p class="content-text" [style.color]="grid.color" >{{grid.content}}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button>{{grid.buttonText}}</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-grid-tile>
+</mat-grid-list>

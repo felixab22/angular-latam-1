@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "<%= owner_name %>-<%= repository_name %>"
+  labels:
+    app: "<%= owner_name %>"
+    git_commit: "<%= git_commit %>"
+    build_id: "<%= build_id %>"
+    runtime: "Nginx"
+    technology-stack: "angular.12"
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 10
+      maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: "<%= repository_name %>"
+  progressDeadlineSeconds: 600
+  template:
+    metadata:
+      name: "<%= owner_name %>-<%= repository_name %>"
+      labels:
+        app: "<%= owner_name %>"
+        git_commit: "<%= git_commit %>"
+        build_id: "<%= build_id %>"
+        pod: "<%= repository_name %>"
+    spec:
+      serviceAccountName: "<%= owner_name %>-<%= environment %>-sa"
+      volumes:
+      - name: "<%= owner_name %>-<%= environment %>-volume"
+        configMap:
+          name: "<%= owner_name %>-<%= repository_name %>-settings"
+      containers:
+      - name: app
+        image: "<%= docker_image %>"
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: "<%= owner_name %>-<%= environment %>-configmap"
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+          - name: "<%= owner_name %>-<%= environment %>-volume"
+            mountPath: /usr/share/nginx/html/assets/config/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "<%= owner_name %>-<%= repository_name %>-service"
+  labels:
+    app: "<%= owner_name %>"
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    pod: "<%= repository_name %>"
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "<%= owner_name %>-<%= repository_name %>-settings"
+  labels:
+    app: "<%= owner_name %>"
+data:
+  app.config.json: |-
+    {
+        "build_id": "<%= build_id %>",
+        "git_commit": "<%= git_commit %>",
+        "gsuite_client_id": "<%= gsuite_client_id %>",
+        "gsuite_client_email": "<%= gsuite_client_email %>",
+        "environment": "<%= environment %>",
+        "base_href": "<%= dns_record %>",
+        "background_color": "black"
+    }

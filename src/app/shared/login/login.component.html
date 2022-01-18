@@ -1,0 +1,17 @@
+<!-- cSpell:disable -->
+<div class="contenedor" id="fondo-principal">
+
+    <div class="imagen">
+      <img class="fondo" src="https://firebasestorage.googleapis.com/v0/b/tucompras.appspot.com/o/fondo-4.jpg?alt=media&token=e2b06f3d-2750-40d5-8f5a-458d937391a5" alt="#">
+    </div>
+      <div class="loginBox">
+        <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/tucompras.appspot.com/o/logo-1.png?alt=media&token=93b8307a-4776-4a74-99d6-ef2b70600ba7" alt="#">
+       <p class="bienvenido">
+         Bienvenido a Negos Web
+       </p>
+      <br><br><br>
+       <a class="btn" role="button" (click)="signInWithGoogle()"><span class="fa fa-google"></span> Entrar con Google  </a>
+       <p class="warning" *ngIf="isError">usuario sin permiso para acceder.</p>
+      </div>
+    </div>  
+  
